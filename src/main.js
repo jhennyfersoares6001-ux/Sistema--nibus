@@ -12,7 +12,6 @@ const pinia = createPinia()
 app.use(pinia)
 app.use(router)
 
-// carrega os dados do Dexie antes de mostrar o site
 useSistemaStore(pinia)
   .carregarDados()
   .finally(() => app.mount('#app'))
