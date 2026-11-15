@@ -2,7 +2,6 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { db } from '../db.js'
 
-// o IndexedDB não aceita objetos reativos do Vue, então copiamos como JSON simples
 const limpo = (obj) => JSON.parse(JSON.stringify(obj))
 const gravar = (tabela, obj) => db[tabela].put(limpo(obj)).catch(console.error)
 const apagar = (tabela, id) => db[tabela].delete(id).catch(console.error)
@@ -13,7 +12,6 @@ export const useSistemaStore = defineStore('sistema', () => {
   const motoristas = ref([])
   const avisos = ref([])
 
-  // lê tudo do Dexie quando o site abre
   async function carregarDados() {
     linhas.value = await db.linhas.toArray()
     alunos.value = await db.alunos.toArray()
@@ -31,6 +29,7 @@ export const useSistemaStore = defineStore('sistema', () => {
   // ÔNIBUS
   function adicionarOnibus(dados) {
     const novo = { ...dados, id: Date.now() }
+
     linhas.value.push(novo)
     gravar('linhas', novo)
   }
@@ -40,7 +39,7 @@ export const useSistemaStore = defineStore('sistema', () => {
     linhas.value[i] = { ...linhas.value[i], ...dados }
     gravar('linhas', linhas.value[i])
   }
-  // retorna false se ainda houver alunos neste ônibus
+
   function excluirOnibus(id) {
     if (alunos.value.some((a) => a.onibusId === id)) return false
     linhas.value = linhas.value.filter((l) => l.id !== id)
@@ -111,7 +110,7 @@ export const useSistemaStore = defineStore('sistema', () => {
     gravar('alunos', alunos.value[i])
   }
 
-  // true = vai usar, false = não vai, null = ainda não confirmou hoje
+ 
   function usoDeHoje(aluno) {
     if (aluno.usoHoje && aluno.usoHoje.data === hoje()) return aluno.usoHoje.usa
     return null
