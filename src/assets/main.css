@@ -1,0 +1,235 @@
+:root {
+  --cor: #7c3aed;
+  --cor-escura: #6d28d9;
+  --cor-clara: #ede9fe;
+  --fundo: #f6f5fb;
+  --superficie: #ffffff;
+  --texto: #1f1b2e;
+  --texto-suave: #6b6880;
+  --borda: #e6e3f1;
+  --perigo: #dc2626;
+  --raio: 14px;
+  --sombra: 0 1px 2px rgba(31, 27, 46, 0.06), 0 8px 24px rgba(31, 27, 46, 0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --cor-clara: #2e2350;
+    --fundo: #13111c;
+    --superficie: #1c1928;
+    --texto: #f1eefc;
+    --texto-suave: #a8a3c0;
+    --borda: #2b2740;
+    --sombra: 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+  line-height: 1.5;
+}
+
+#app { max-width: 960px; margin: 0 auto; padding: 0 20px 48px; }
+
+/* Cabeçalho e menu */
+header { padding: 24px 0 8px; }
+header h1 { font-size: 1.6rem; margin: 0 0 16px; letter-spacing: -0.02em; }
+
+header nav { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; }
+
+header nav a {
+  white-space: nowrap;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  color: var(--texto);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: 0.15s;
+}
+header nav a:hover { border-color: var(--cor); color: var(--cor); }
+header nav a.router-link-exact-active {
+  background: var(--cor);
+  border-color: var(--cor);
+  color: #fff;
+}
+
+main { padding-top: 16px; }
+h2 { font-size: 1.5rem; letter-spacing: -0.02em; color: var(--cor); margin: 8px 0 16px; }
+h3 { margin: 28px 0 12px; }
+small { color: var(--texto-suave); }
+
+/* Cartões */
+.cartao, form, .aviso-box {
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+.cartao h3 { margin: 0 0 8px; }
+.cartao p { margin: 6px 0; }
+form { max-width: 560px; }
+
+/* Formulários */
+form label { display: block; margin-bottom: 14px; font-weight: 500; font-size: 0.9rem; }
+
+input, select, textarea {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px 12px;
+  font: inherit;
+  color: var(--texto);
+  background: var(--fundo);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  transition: 0.15s;
+}
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--cor);
+  box-shadow: 0 0 0 3px var(--cor-clara);
+}
+
+/* Botões */
+button, .btn {
+  display: inline-block;
+  padding: 9px 16px;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #fff;
+  background: var(--cor);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: 0.15s;
+}
+button:hover, .btn:hover { background: var(--cor-escura); transform: translateY(-1px); }
+
+.btn-sec { background: var(--cor-clara); color: var(--cor); }
+.btn-sec:hover { background: var(--cor-clara); filter: brightness(0.95); }
+
+.btn-perigo { background: var(--perigo); }
+.btn-perigo:hover { background: #b91c1c; }
+
+/* Tabelas */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  overflow: hidden;
+}
+th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--borda); }
+th {
+  background: var(--cor-clara);
+  color: var(--cor);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+tr:last-child td { border-bottom: none; }
+td a { color: var(--cor); font-weight: 600; text-decoration: none; }
+
+/* Início */
+.hero {
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff;
+  border-radius: var(--raio);
+  padding: 28px 24px;
+  margin-bottom: 16px;
+}
+.hero h2 { color: #fff; margin: 0 0 6px; }
+.hero p { margin: 0; opacity: 0.9; }
+
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.stat {
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 14px 16px;
+}
+.stat strong { display: block; font-size: 1.6rem; color: var(--cor); }
+.stat span { color: var(--texto-suave); font-size: 0.85rem; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 8px; }
+.acao {
+  display: block;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  padding: 18px;
+  color: inherit;
+  text-decoration: none;
+  transition: 0.2s;
+}
+.acao:hover { transform: translateY(-3px); border-color: var(--cor); }
+.acao h4 { margin: 0 0 4px; color: var(--cor); }
+.acao p { margin: 0 0 12px; color: var(--texto-suave); font-size: 0.9rem; }
+
+.barra { height: 8px; background: var(--cor-clara); border-radius: 999px; overflow: hidden; margin-top: 8px; }
+.barra-fill { height: 100%; background: var(--cor); border-radius: 999px; transition: width 0.4s; }
+
+.aviso-box { background: #fff8db; border-color: #e6c200; box-shadow: none; color: #3b3200; }
+.aviso-box small { color: #7a6a00; }
+.aviso-box h3 { margin-top: 0; }
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  font-size: 1.6rem;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #7c3aed, #c026d3);
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.35);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.7rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+header h1 span {
+  background: linear-gradient(90deg, #8b5cf6, #d946ef);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.marca p {
+  margin: 2px 0 0;
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+}
+
+.logo svg {
+  width: 28px;
+  height: 28px;
+  color: #fff;
+}
